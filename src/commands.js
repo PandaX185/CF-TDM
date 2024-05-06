@@ -1,0 +1,81 @@
+import { ApplicationCommandOptionType, REST, Routes } from "discord.js";
+
+export const commands = [
+	{
+		name: 'list-teams',
+		description: 'Lists all teams in the server',
+	},
+	{
+		name: 'add-team',
+		description: 'Adds/Updates a team to the server',
+		options: [
+			{
+				name: 'team-name',
+				description: 'The name of the team',
+				type: ApplicationCommandOptionType.String,
+				required: true,
+			},
+			{
+				name: 'members',
+				description: 'The members of the team',
+				type: ApplicationCommandOptionType.String,
+				required: true,
+			}
+		]
+	},
+	{
+		name: 'del-team',
+		description: 'Deletes a team from the server',
+		options: [
+			{
+				name: 'team-name',
+				description: 'The name of the team',
+				type: ApplicationCommandOptionType.String,
+				required: true,
+			}
+		],
+	},
+	{
+		name: 'match',
+		description: 'Matches a team with another team',
+		options: [
+			{
+				name: 'first-team',
+				description: 'The name of the first team',
+				type: ApplicationCommandOptionType.String,
+				required: true,
+			},
+			{
+				name: 'second-team',
+				description: 'The name of the second team',
+				type: ApplicationCommandOptionType.String,
+				required: true,
+			},
+			{
+				name: 'problem-numbers',
+				description: 'The problem numbers in the match',
+				type: ApplicationCommandOptionType.Integer,
+				required: false,
+			},
+			{
+				name: 'difficulty',
+				description: 'The difficulty of the match',
+				type: ApplicationCommandOptionType.Integer,
+				required: false,
+			}
+		],
+	}
+];
+
+const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
+(async () => {
+	try {
+		await rest.put(
+			Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
+			{ body: commands }
+		);
+		console.log("Successfully registered application commands.");
+	} catch (error) {
+		console.error(error);
+	}
+})();
