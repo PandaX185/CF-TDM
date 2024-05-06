@@ -4,7 +4,8 @@ dotenv.config();
 import { addTeam, listTeams, deleteTeam, matchTeams } from "./handlers.js";
 import { readProblemSet, getProblemUpdates } from "./problemset.js";
 import { CronJob } from 'cron';
-import { Redis } from "ioredis"
+import { Redis } from "ioredis";
+import express from 'express';
 
 await readProblemSet();
 const client = new Client({
@@ -16,6 +17,17 @@ const client = new Client({
 	]
 })
 const redis = new Redis(process.env.REDIS_URL)
+
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
+
+app.listen(3000, () => {
+	console.log("Server started");
+})
 
 client.login(process.env.BOT_TOKEN);
 
