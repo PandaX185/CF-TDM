@@ -22,7 +22,6 @@ const redis = new Redis(process.env.REDIS_URL)
 const app = express();
 
 app.get('/', (req, res) => {
-	z
 	res.send('Hello World!')
 })
 
