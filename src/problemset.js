@@ -7,8 +7,8 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 export const getTeamProblems = async function (members, limit, difficulty) {
 	let teamProblems = problems
-	if (!limit) limit = 12
-	if (!difficulty) difficulty = 1000
+	if (!limit) limit = 12;
+	if (!difficulty) difficulty = 1000;
 	for (const user of members) {
 		try {
 			const response = await axios.get(baseUrl + 'user.status?handle=' + user);

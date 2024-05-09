@@ -36,6 +36,30 @@ export const commands = [
 		],
 	},
 	{
+		name: 'train',
+		description: 'Train a team',
+		options: [
+			{
+				name: 'team',
+				description: 'The name of the team',
+				type: ApplicationCommandOptionType.String,
+				required: true,
+			},
+			{
+				name: 'problem-numbers',
+				description: 'The problem numbers in the match',
+				type: ApplicationCommandOptionType.Integer,
+				required: false,
+			},
+			{
+				name: 'difficulty',
+				description: 'The difficulty of the match',
+				type: ApplicationCommandOptionType.Integer,
+				required: false,
+			}
+		],
+	},
+	{
 		name: 'match',
 		description: 'Matches a team with another team',
 		options: [
